@@ -1,0 +1,20 @@
+.task-list {
+    margin-top: 2rem;
+  }
+  
+  .task-list h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .task-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .task-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+  }

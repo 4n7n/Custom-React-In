@@ -1,0 +1,28 @@
+.header {
+    background-color: #1e293b;
+    color: #fff;
+    padding: 1.5rem 1rem;
+  }
+  
+  .header-content {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  
+  .header-title {
+    font-size: 1.875rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .header-icon {
+    height: 2rem;
+    width: 2rem;
+  }
+  
+  .header-description {
+    margin-top: 0.5rem;
+    color: #cbd5e1;
+  }
