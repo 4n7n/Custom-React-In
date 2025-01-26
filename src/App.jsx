@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { MapPin } from "lucide-react";
+import MapComponent from "./components/MapComponent";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="min-h-screen flex flex-col">
+      <header className="bg-slate-800 text-white py-6 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-3xl font-bold flex items-center gap-2">
+            <MapPin className="h-8 w-8" />
+            Mapa Interactivo
+          </h1>
+          <p className="mt-2 text-slate-300">
+            Visualiza ubicaciones dinámicamente usando React y Leaflet
+          </p>
+        </div>
+      </header>
 
-export default App
+      <main className="flex-grow container mx-auto px-4 py-8">
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <MapComponent />
+        </div>
+      </main>
+
+      <footer className="bg-slate-50 py-6 px-4 border-t border-slate-200">
+      </footer>
+    </div>
+  );
+};
+
+export default App;
