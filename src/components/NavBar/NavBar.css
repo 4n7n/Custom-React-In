@@ -1,0 +1,91 @@
+:root {
+  --color-background-dark: #121212;
+  --color-background-light: #1e1e1e;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #9e9e9e;
+  --color-accent-blue: #2196f3;
+  --transition-speed: 0.3s;
+}
+
+.navbar {
+  width: 100%;
+  background-color: var(--color-background-dark);
+  transition: all var(--transition-speed);
+  overflow: hidden;
+  position: relative;
+}
+
+.navbar-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-speed) ease;
+}
+
+.navbar.menu-open .navbar-container {
+  max-height: 200px;
+  padding: 1rem 0;
+}
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: all var(--transition-speed);
+}
+
+.navbar-label {
+  display: none;
+  margin-left: 0.5rem;
+}
+
+.navbar.menu-open .navbar-label {
+  display: inline;
+}
+
+.navbar-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-accent-blue);
+}
+
+.navbar-item.active {
+  background-color: rgba(33, 150, 243, 0.2);
+  color: var(--color-accent-blue);
+}
+
+.nav-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .navbar-toggle {
+    display: none;
+  }
+
+  .navbar-container {
+    max-height: none;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .navbar-label {
+    display: inline;
+  }
+}

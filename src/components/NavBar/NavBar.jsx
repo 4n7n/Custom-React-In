@@ -1,60 +1,64 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  Map, 
-  List, 
-  PlusCircle, 
-  Home 
+import {
+  Map,
+  List,
+  PlusCircle,
+  Home,
+  Menu
 } from 'lucide-react';
+import './Navbar.css';
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   const navItems = [
-    { 
-      icon: <Home className="w-5 h-5" />, 
-      label: 'Inicio', 
+    {
+      icon: <Home className="nav-icon" />,
+      label: 'Inicio',
       path: '/',
       active: location.pathname === '/'
     },
-    { 
-      icon: <PlusCircle className="w-5 h-5" />, 
-      label: 'Crear Tarea', 
+    {
+      icon: <PlusCircle className="nav-icon" />,
+      label: 'Crear Tarea',
       path: '/crear-tarea',
       active: location.pathname === '/crear-tarea'
     },
-    { 
-      icon: <List className="w-5 h-5" />, 
-      label: 'Lista Tareas', 
+    {
+      icon: <List className="nav-icon" />,
+      label: 'Lista Tareas',
       path: '/lista-tareas',
       active: location.pathname === '/lista-tareas'
     },
-    { 
-      icon: <Map className="w-5 h-5" />, 
-      label: 'Mapa', 
+    {
+      icon: <Map className="nav-icon" />,
+      label: 'Mapa',
       path: '/mapa',
       active: location.pathname === '/mapa'
     }
   ];
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav className="bg-white dark:bg-gray-800 w-20 md:w-64 border-r dark:border-gray-700 transition-all duration-300">
-      <div className="flex flex-col h-full py-4">
+    <nav className={`navbar ${isMenuOpen ? 'menu-open' : ''}`}>
+      <button className="navbar-toggle" onClick={toggleMenu}>
+        <Menu />
+      </button>
+      
+      <div className="navbar-container">
         {navItems.map((item) => (
           <Link
             key={item.path}
             to={item.path}
-            className={`
-              flex items-center justify-center md:justify-start 
-              px-4 py-3 
-              transition-colors duration-300
-              ${item.active 
-                ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300' 
-                : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }
-            `}
+            className={`navbar-item ${item.active ? 'active' : ''}`}
           >
             {item.icon}
-            <span className="hidden md:inline ml-3">{item.label}</span>
+            <span className="navbar-label">{item.label}</span>
           </Link>
         ))}
       </div>

@@ -1,31 +1,95 @@
-.home {
-    text-align: center;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+/* Home Component Dark Theme Styling */
+:root {
+  --color-background-dark: #121212;
+  --color-background-card: #1e1e1e;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #a0a0a0;
+  --color-accent-green: #4caf50;
+  --color-accent-blue: #2196f3;
+  --transition-speed: 0.3s;
+ }
+ 
+ .home-container {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  padding: 2rem;
+ }
+ 
+ .home-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+ }
+ 
+ .home-title {
+  font-size: 2.5rem;
+  color: var(--color-accent-green);
+  margin-bottom: 1rem;
+ }
+ 
+ .home-subtitle {
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+ }
+ 
+ .home-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+ }
+ 
+ .feature-card {
+  background-color: var(--color-background-card);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: 
+    transform var(--transition-speed),
+    box-shadow var(--transition-speed);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+ }
+ 
+ .feature-icon {
+  width: 3rem;
+  height: 3rem;
+  color: var(--color-accent-blue);
+  margin-bottom: 1rem;
+  transition: color var(--transition-speed);
+ }
+ 
+ .feature-card:hover .feature-icon {
+  color: var(--color-accent-green);
+ }
+ 
+ .feature-title {
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+ }
+ 
+ .feature-description {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+ }
+ 
+ /* Responsive Design */
+ @media (max-width: 768px) {
+  .home-features {
+    grid-template-columns: 1fr;
   }
-  
-  .home-title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .home-description {
-    font-size: 1.125rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .home-button {
-    background-color: #3b82f6;
-    color: #fff;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    text-decoration: none;
-    border-radius: 0.25rem;
-  }
-  
-  .home-button:hover {
-    background-color: #2563eb;
-  }
+ }
+ 
+ /* Subtle Animations */
+ @keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+ }
+ 
+ .feature-card {
+  animation: fadeIn 0.5s ease-out;
+ }

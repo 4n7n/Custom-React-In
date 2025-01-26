@@ -1,30 +1,47 @@
-import { Github, Linkedin, Twitter, Globe } from 'lucide-react';
+import { Github, Linkedin, Twitter, Globe, Code } from 'lucide-react';
+import './Footer.css';
 
 const Footer = () => {
   const socialLinks = [
-    { Icon: Github, href: '#', color: 'text-gray-400 hover:text-white' },
-    { Icon: Linkedin, href: '#', color: 'text-gray-400 hover:text-blue-500' },
-    { Icon: Twitter, href: '#', color: 'text-gray-400 hover:text-blue-400' }
+    { 
+      Icon: Github, 
+      href: '#', 
+      color: 'github-link' 
+    },
+    { 
+      Icon: Linkedin, 
+      href: '#', 
+      color: 'linkedin-link' 
+    },
+    { 
+      Icon: Twitter, 
+      href: '#', 
+      color: 'twitter-link' 
+    }
   ];
 
   return (
-    <footer className="bg-gray-900 text-white py-4">
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center">
-          <Globe className="w-5 h-5 text-green-500 mr-2" />
-          <span className="text-sm">© 2024 TaskMap</span>
+    <footer className="footer">
+      <div className="footer-container">
+        <div className="footer-branding">
+          <Globe className="footer-icon" />
+          <span className="footer-copyright">© 2024 TaskMap</span>
         </div>
-        
-        <div className="flex space-x-4">
+       
+        <div className="footer-social">
           {socialLinks.map(({ Icon, href, color }, index) => (
-            <a 
-              key={index} 
-              href={href} 
-              className={`${color} transition-colors duration-300 hover:scale-110`}
+            <a
+              key={index}
+              href={href}
+              className={`social-link ${color}`}
             >
-              <Icon className="w-6 h-6" />
+              <Icon className="social-icon" />
             </a>
           ))}
+          <a href="#" className="developer-link">
+            <Code className="developer-icon" />
+            <span>Desarrollado con ♥</span>
+          </a>
         </div>
       </div>
     </footer>

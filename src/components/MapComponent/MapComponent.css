@@ -1,60 +1,75 @@
-.map-container {
-    height: 600px;
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Estilos para MapComponent - Tema Oscuro */
+:root {
+  --color-fondo-oscuro: #121212;
+  --color-texto-principal: #e0e0e0;
+  --color-texto-secundario: #9e9e9e;
+  --color-borde: #2c2c2c;
+  --color-acento-verde: #4caf50;
+  --sombra-sutil: 0 4px 6px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .map-container {
+  width: 100%;
+  height: 500px;
+  background-color: var(--color-fondo-oscuro);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--sombra-sutil);
+ }
+ 
+ .map {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+ }
+ 
+ .map-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: var(--color-fondo-oscuro);
+ }
+ 
+ .map-loader {
+  color: var(--color-acento-verde);
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+ }
+ 
+ .map-error {
+  background-color: var(--color-fondo-oscuro);
+  color: var(--color-texto-principal);
+  padding: 1rem;
+  text-align: center;
+ }
+ 
+ .map-popup {
+  background-color: var(--color-fondo-oscuro);
+  color: var(--color-texto-principal);
+  border-radius: 8px;
+  padding: 0.5rem;
+ }
+ 
+ .map-popup-title {
+  color: var(--color-acento-verde);
+  margin-bottom: 0.25rem;
+ }
+ 
+ .map-popup-description {
+  color: var(--color-texto-secundario);
+  font-size: 0.875rem;
+ }
+ 
+ @keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+ }
+ 
+ /* Responsive Design */
+ @media (max-width: 640px) {
+  .map-container {
+    height: 300px;
   }
-  
-  .map {
-    height: 100%;
-    width: 100%;
-  }
-  
-  .map-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 600px;
-  }
-  
-  .map-loader {
-    height: 32px;
-    width: 32px;
-    animation: spin 1s linear infinite;
-    color: #64748b;
-  }
-  
-  .map-error {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 600px;
-    color: #ef4444;
-    font-weight: 600;
-  }
-  
-  .map-popup {
-    padding: 8px;
-  }
-  
-  .map-popup-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  
-  .map-popup-description {
-    font-size: 14px;
-    color: #64748b;
-    margin-top: 4px;
-  }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+ }
