@@ -1,5 +1,5 @@
 import { MapPin } from "lucide-react";
-import MapComponent from "./components/MapComponent";
+import MapComponent from "./components/MapComponent/MapComponent";
 
 const App = () => {
   return (
