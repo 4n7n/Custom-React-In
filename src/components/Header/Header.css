@@ -1,28 +1,78 @@
-.header {
-    background-color: #1e293b;
-    color: #fff;
-    padding: 1.5rem 1rem;
+/* Dark and Green Theme Header Styling */
+:root {
+    /* Dark Theme Colors */
+    --color-background-dark: #111827;
+    --color-background-darker: #0f172a;
+    --color-green-primary: #22c55e;
+    --color-green-secondary: #16a34a;
+    --color-green-accent: #4ade80;
+    --color-text-white: #f9fafb;
+    --color-text-light: #e5e7eb;
+  }
+  
+  .header {
+    background-color: var(--color-background-dark);
+    color: var(--color-text-white);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle at center, 
+      rgba(34, 197, 94, 0.1) 0%, 
+      transparent 70%
+    );
+    z-index: 1;
   }
   
   .header-content {
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-  
-  .header-title {
-    font-size: 1.875rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    position: relative;
+    z-index: 2;
   }
   
   .header-icon {
-    height: 2rem;
-    width: 2rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  .header-icon:hover {
+    transform: scale(1.1) rotate(10deg);
+  }
+  
+  .header-title {
+    color: var(--color-text-white);
+    text-shadow: 0 2px 4px rgba(34, 197, 94, 0.3);
   }
   
   .header-description {
-    margin-top: 0.5rem;
-    color: #cbd5e1;
+    color: var(--color-text-light);
+  }
+  
+  button {
+    background-color: var(--color-green-primary);
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: var(--color-green-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(34, 197, 94, 0.2);
+  }
+  
+  /* Responsive Adjustments */
+  @media screen and (max-width: 640px) {
+    .header-title {
+      font-size: 2rem;
+    }
+    
+    .header-description {
+      font-size: 1rem;
+    }
   }
