@@ -1,30 +1,31 @@
-import { MapPin, Share2, CloudCog } from 'lucide-react';
+import { MapPin, Share2, CloudCog, Navigation, Globe } from 'lucide-react';
 import './Header.css';
 
 const Header = () => {
- return (
-   <header className="header dark:bg-gray-900 transition-colors duration-300 relative overflow-hidden">
-     <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 opacity-50"></div>
-     <div className="header-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-       <div className="header-wrapper text-center py-12">
-         <div className="flex justify-center items-center gap-4 mb-4">
-           <MapPin className="header-icon text-blue-600 dark:text-blue-400 w-10 h-10 animate-pulse" />
-           <CloudCog className="header-icon text-green-600 dark:text-green-400 w-8 h-8" />
-           <Share2 className="header-icon text-purple-600 dark:text-purple-400 w-8 h-8" />
-         </div>
-         <h1 className="header-title text-3xl sm:text-4xl lg:text-5xl font-extrabold
-           text-gray-900 dark:text-white flex items-center justify-center gap-3 mb-4">
-           TaskMap: Mapa Interactivo
-         </h1>
-         <p className="header-description text-lg sm:text-xl text-gray-600 dark:text-gray-300
-           max-w-2xl mx-auto tracking-wide leading-relaxed">
-           Visualiza y gestiona ubicaciones dinámicamente usando React y Leaflet. 
-           Organiza tus tareas con precisión geográfica.
-         </p>
-       </div>
-     </div>
-   </header>
- );
+  return (
+    <header className="task-map-header">
+      <div className="header-background"></div>
+      <div className="header-content">
+        <div className="header-icons">
+          <MapPin className="icon map-icon" />
+          <CloudCog className="icon cloud-icon" />
+          <Share2 className="icon share-icon" />
+          <Navigation className="icon nav-icon" />
+          <Globe className="icon globe-icon" />
+        </div>
+        
+        <div className="header-text">
+          <h1 className="header-title">
+            TaskMap: Gestión Geográfica Inteligente
+          </h1>
+          <p className="header-description">
+            Transforma la organización de tareas con visualización geoespacial en tiempo real. 
+            Simplifica la planificación y seguimiento con tecnología de punta.
+          </p>
+          </div>
+      </div>
+    </header>
+  );
 };
 
 export default Header;

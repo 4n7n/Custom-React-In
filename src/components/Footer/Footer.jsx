@@ -1,22 +1,22 @@
-import { Github, Linkedin, Twitter, Globe, Code } from 'lucide-react';
+import { Github, Linkedin, Twitter, Globe, Code, Heart } from 'lucide-react';
 import './Footer.css';
 
 const Footer = () => {
   const socialLinks = [
-    { 
-      Icon: Github, 
-      href: '#', 
-      color: 'github-link' 
+    {
+      Icon: Github,
+      href: 'https://github.com/your-profile',
+      title: 'GitHub'
     },
-    { 
-      Icon: Linkedin, 
-      href: '#', 
-      color: 'linkedin-link' 
+    {
+      Icon: Linkedin,
+      href: 'https://linkedin.com/in/your-profile',
+      title: 'LinkedIn'
     },
-    { 
-      Icon: Twitter, 
-      href: '#', 
-      color: 'twitter-link' 
+    {
+      Icon: Twitter,
+      href: 'https://twitter.com/your-profile',
+      title: 'Twitter'
     }
   ];
 
@@ -25,23 +25,40 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-branding">
           <Globe className="footer-icon" />
-          <span className="footer-copyright">© 2024 TaskMap</span>
+          <span className="footer-copyright">
+            © {new Date().getFullYear()} TaskMap
+          </span>
         </div>
        
         <div className="footer-social">
-          {socialLinks.map(({ Icon, href, color }, index) => (
-            <a
-              key={index}
-              href={href}
-              className={`social-link ${color}`}
+          <div className="social-links">
+            {socialLinks.map(({ Icon, href, title }, index) => (
+              <a
+                key={index}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-link"
+                title={title}
+              >
+                <Icon className="social-icon" />
+              </a>
+            ))}
+          </div>
+          
+          <div className="developer-info">
+            <a 
+              href="#" 
+              className="developer-link"
+              title="About the Developer"
             >
-              <Icon className="social-icon" />
+              <Code className="developer-icon" />
+              <span>Desarrollado</span>
             </a>
-          ))}
-          <a href="#" className="developer-link">
-            <Code className="developer-icon" />
-            <span>Desarrollado con ♥</span>
-          </a>
+            <span className="love-indicator">
+              <Heart className="heart-icon" />
+            </span>
+          </div>
         </div>
       </div>
     </footer>

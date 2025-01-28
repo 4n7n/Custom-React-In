@@ -1,75 +1,108 @@
-/* Estilos para MapComponent - Tema Oscuro */
 :root {
-  --color-fondo-oscuro: #121212;
-  --color-texto-principal: #e0e0e0;
-  --color-texto-secundario: #9e9e9e;
-  --color-borde: #2c2c2c;
-  --color-acento-verde: #4caf50;
-  --sombra-sutil: 0 4px 6px rgba(0, 0, 0, 0.1);
- }
- 
- .map-container {
-  width: 100%;
-  height: 500px;
-  background-color: var(--color-fondo-oscuro);
+  --color-background-dark: #121212;
+  --color-background-light: #1e1e1e;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #9e9e9e;
+  --color-accent-blue: #2196f3;
+  --color-accent-green: #4caf50;
+  --transition-speed: 0.3s;
+}
+
+.map-component {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-primary);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: var(--sombra-sutil);
- }
- 
- .map {
-  width: 100%;
+}
+
+.map-search-container {
+  padding: 1rem;
+  background-color: var(--color-background-light);
+}
+
+.search-form {
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-background-dark);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-text-secondary);
+  border-radius: 8px 0 0 8px;
+}
+
+.search-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-accent-blue);
+  color: white;
+  border: none;
+  border-radius: 0 8px 8px 0;
+}
+
+.map-container {
+  height: 500px;
+  position: relative;
+}
+
+.map {
   height: 100%;
   z-index: 1;
- }
- 
- .map-loading {
+}
+
+.map-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.zoom-btn {
+  background-color: var(--color-background-light);
+  color: var(--color-text-primary);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.map-loading,
+.map-error {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  background-color: var(--color-fondo-oscuro);
- }
- 
- .map-loader {
-  color: var(--color-acento-verde);
+  height: 500px;
+  background-color: var(--color-background-dark);
+  color: var(--color-text-primary);
+}
+
+.map-loader {
   width: 50px;
   height: 50px;
-  animation: spin 1s linear infinite;
- }
- 
- .map-error {
-  background-color: var(--color-fondo-oscuro);
-  color: var(--color-texto-principal);
-  padding: 1rem;
+  color: var(--color-accent-green);
+}
+
+.custom-popup .popup-content {
   text-align: center;
- }
- 
- .map-popup {
-  background-color: var(--color-fondo-oscuro);
-  color: var(--color-texto-principal);
-  border-radius: 8px;
-  padding: 0.5rem;
- }
- 
- .map-popup-title {
-  color: var(--color-acento-verde);
-  margin-bottom: 0.25rem;
- }
- 
- .map-popup-description {
-  color: var(--color-texto-secundario);
-  font-size: 0.875rem;
- }
- 
- @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
- }
- 
- /* Responsive Design */
- @media (max-width: 640px) {
+}
+
+.popup-title {
+  color: var(--color-accent-blue);
+  margin-bottom: 0.5rem;
+}
+
+.popup-description {
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
   .map-container {
     height: 300px;
   }
- }
+}
