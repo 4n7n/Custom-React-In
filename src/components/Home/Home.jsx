@@ -70,14 +70,6 @@ const Home = () => {
         <p className="home-subtitle">
           Revoluciona tu productividad con gestión de tareas geolocalizada. Transforma la manera de organizar, visualizar y ejecutar tus actividades.
         </p>
-        <div className="home-cta">
-          <Link to="/crear-tarea" className="primary-btn">
-            Comenzar Ahora
-          </Link>
-          <Link to="/mapa" className="secondary-btn">
-            Explorar Mapa
-          </Link>
-        </div>
       </div>
       
       <section className="home-features">
