@@ -4,6 +4,7 @@ import NavBar from './components/NavBar/NavBar.jsx';
 import Home from './components/Home/Home.jsx';
 import TaskForm from './components/TaskForm/TaskForm.jsx';
 import MapComponent from './components/MapComponent/MapComponent.jsx';
+import Database from './components/DataBase/DataBase.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import './App.css';
 
@@ -13,16 +14,17 @@ function App() {
       <div className="min-h-screen flex flex-col">
         <Header />
         <NavBar />
-        
+       
         <main className="flex-grow">
           <Routes>
             {/* Ruta por defecto - redirige a home */}
             <Route path="/" element={<Navigate to="/home" replace />} />
-            
+           
             {/* Rutas principales */}
             <Route path="/home" element={<Home />} />
             <Route path="/crear-tarea" element={<TaskForm />} />
             <Route path="/mapa" element={<MapComponent />} />
+            <Route path="/base" element={<Database />} /> {/* Ruta para nuestro componente Database */}
             
             {/* Ruta para manejar páginas no encontradas */}
             <Route path="*" element={
@@ -33,7 +35,7 @@ function App() {
             } />
           </Routes>
         </main>
-        
+       
         <Footer />
       </div>
     </Router>

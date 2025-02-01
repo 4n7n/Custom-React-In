@@ -11,7 +11,7 @@ const NavBar = () => {
   const menuItems = [
     { name: 'Inicio', icon: <Home className="menu-icon" />, path: '/home' },
     { name: 'Crear Tarea', icon: <CheckSquare className="menu-icon" />, path: '/crear-tarea' },
-    { name: 'Base de Datos', icon: <Database className="menu-icon" />, path: '/database' },
+    { name: 'Base de Datos', icon: <Database className="menu-icon" />, path: '/base' }, // Actualizado a /base para coincidir con la ruta en App.jsx
     { name: 'Mapa', icon: <Map className="menu-icon" />, path: '/mapa' },
   ];
 
@@ -34,7 +34,7 @@ const NavBar = () => {
           <div className="navbar-main">
             {/* Logo */}
             <div className="logo-container">
-              <div 
+              <div
                 className="logo-wrapper"
                 onClick={() => handleNavigation('/home')}
                 style={{ cursor: 'pointer' }}
