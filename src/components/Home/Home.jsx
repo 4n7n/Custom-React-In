@@ -1,95 +1,139 @@
-import { 
-  MapPin, 
-  PlusCircle, 
-  List, 
-  Target, 
-  Clock, 
-  Share2, 
-  Navigation, 
-  ChartPie 
-} from 'lucide-react';
-import { Link } from 'react-router-dom';
 import './Home.css';
 
 const Home = () => {
-  const features = [
-    {
-      icon: <MapPin className="feature-icon" />,
-      title: 'Mapeo Interactivo',
-      description: 'Visualiza tus tareas geográficamente con un mapa detallado. Cada tarea se ubica con precisión, permitiéndote entender su contexto espacial y optimizar tu gestión.',
-      link: '/mapa'
-    },
-    {
-      icon: <PlusCircle className="feature-icon" />,
-      title: 'Creación Inteligente de Tareas',
-      description: 'Crea tareas rápidamente con información geolocalizada. Añade detalles como ubicación, prioridad y tiempo estimado en un solo paso intuitivo.',
-      link: '/crear-tarea'
-    },
-    {
-      icon: <List className="feature-icon" />,
-      title: 'Gestión Centralizada',
-      description: 'Administra todas tus tareas desde un panel unificado. Filtra, ordena y visualiza tus actividades con herramientas de gestión avanzadas.',
-      link: '/lista-tareas'
-    },
-    {
-      icon: <Target className="feature-icon" />,
-      title: 'Precisión Geográfica',
-      description: 'Localiza tareas con exactitud milimétrica. Utiliza coordenadas GPS y herramientas de mapeo para una gestión espacial perfecta.',
-      link: '/mapa'
-    },
-    {
-      icon: <Clock className="feature-icon" />,
-      title: 'Gestión de Tiempo',
-      description: 'Optimiza tu productividad con seguimiento de tiempo en tiempo real. Analiza la duración y eficiencia de cada tarea.',
-      link: '/lista-tareas'
-    },
-    {
-      icon: <Share2 className="feature-icon" />,
-      title: 'Colaboración Geolocalizada',
-      description: 'Comparte y sincroniza tareas instantáneamente. Permite a tu equipo ver y gestionar ubicaciones de tareas en tiempo real.',
-      link: '/crear-tarea'
-    },
-    {
-      icon: <Navigation className="feature-icon" />,
-      title: 'Rutas y Planificación',
-      description: 'Planifica rutas óptimas entre tareas. Minimiza tiempos de desplazamiento y maximiza la eficiencia de tu día.',
-      link: '/mapa'
-    },
-    {
-      icon: <ChartPie className="feature-icon" />,
-      title: 'Análisis de Productividad',
-      description: 'Genera informes detallados sobre tu rendimiento. Visualiza estadísticas de tareas, tiempo y ubicaciones para una mejora continua.',
-      link: '/lista-tareas'
-    }
-  ];
-
   return (
-    <div className="home-container">
-      <div className="home-hero">
-        <h1 className="home-title">TaskMap: Gestión Geoespacial</h1>
-        <p className="home-subtitle">
-          Revoluciona tu productividad con gestión de tareas geolocalizada. Transforma la manera de organizar, visualizar y ejecutar tus actividades.
-        </p>
-      </div>
-      
-      <section className="home-features">
-        <h2 className="section-title">Características Principales</h2>
-        <div className="feature-grid">
-          {features.map((feature, index) => (
-            <Link
-              key={index}
-              to={feature.link}
-              className="feature-card"
-            >
-              {feature.icon}
-              <h3 className="feature-title">{feature.title}</h3>
-              <p className="feature-description">{feature.description}</p>
-            </Link>
-          ))}
+    <main className="home">
+      <div className="home__wrapper">
+        {/* Background gradients */}
+        <div className="home__gradient home__gradient--1" />
+        <div className="home__gradient home__gradient--2" />
+        
+        <div className="home__content">
+          {/* Hero Section */}
+          <section className="hero">
+            <span className="hero__badge">
+              ✨ Bienvenido a TaskMaster
+            </span>
+            
+            <h1 className="hero__title">
+              Organiza tus tareas con{' '}
+              <span className="hero__title-gradient">inteligencia</span>
+            </h1>
+            
+            <p className="hero__description">
+              Revoluciona tu productividad con IA avanzada. Organiza, prioriza y completa 
+              tus tareas de manera más inteligente que nunca.
+            </p>
+          </section>
+
+          {/* Features Section */}
+          <section className="features">
+            {features.map((feature, index) => (
+              <div key={index} className="feature-card">
+                <h3 className={`feature-card__title ${feature.color}`}>
+                  {feature.title}
+                </h3>
+                <p className="feature-card__description">
+                  {feature.description}
+                </p>
+              </div>
+            ))}
+          </section>
+
+          {/* Preview Section */}
+          <section className="preview">
+            <div className="preview__container">
+              {/* Dashboard Preview */}
+              <div className="preview-card">
+                <div className="preview-card__overlay" />
+                <div className="preview-card__content">
+                  <h3 className="preview-card__title">Dashboard</h3>
+                  
+                  <div className="dashboard-stats">
+                    <div className="stat-box">
+                      <div className="stat-bar stat-bar--green" />
+                      <div className="stat-bar stat-bar--green-light" />
+                    </div>
+                    <div className="stat-box">
+                      <div className="stat-bar stat-bar--blue" />
+                      <div className="stat-bar stat-bar--blue-light" />
+                    </div>
+                  </div>
+                  
+                  <div className="task-list">
+                    {[0, 1, 2].map((i) => (
+                      <div key={i} className="task-item">
+                        <span className={`task-status task-status--${i === 0 ? 'green' : i === 1 ? 'blue' : 'gray'}`} />
+                        <div className="task-line" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Analytics Preview */}
+              <div className="preview-card">
+                <div className="preview-card__overlay" />
+                <div className="preview-card__content">
+                  <h3 className="preview-card__title">Análisis</h3>
+                  <div className="chart">
+                    {[48, 35, 62, 45, 55, 40].map((height, i) => (
+                      <div 
+                        key={i}
+                        className={`chart__bar ${i < 3 ? 'chart__bar--green' : 'chart__bar--blue'}`}
+                        style={{ height: `${height}%` }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Map Preview */}
+              <div className="preview-card">
+                <div className="preview-card__overlay" />
+                <div className="preview-card__content">
+                  <h3 className="preview-card__title">Ubicaciones</h3>
+                  <div className="map">
+                    <div className="map__pin map__pin--1" />
+                    <div className="map__pin map__pin--2" />
+                    <div className="map__pin map__pin--3" />
+                    <div className="map__grid">
+                      {Array(16).fill(null).map((_, i) => (
+                        <div key={i} className="map__grid-cell" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-      </section>
-    </div>
+      </div>
+    </main>
   );
 };
+
+const features = [
+  {
+    title: 'Eficiencia',
+    description: 'Optimiza tu tiempo con gestión inteligente',
+    color: 'text-green'
+  },
+  {
+    title: 'Organización',
+    description: 'Todo en un solo lugar, siempre accesible',
+    color: 'text-blue'
+  },
+  {
+    title: 'Colaboración',
+    description: 'Trabaja en equipo sin complicaciones',
+    color: 'text-green'
+  },
+  {
+    title: 'Simplicidad',
+    description: 'Interfaz intuitiva y fácil de usar',
+    color: 'text-blue'
+  }
+];
 
 export default Home;

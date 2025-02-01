@@ -1,0 +1,207 @@
+/* Variables CSS */
+:root {
+    --color-primary: #111827;    /* gray-900 */
+    --color-secondary: #22c55e;  /* green-500 */
+    --color-tertiary: #3b82f6;   /* blue-500 */
+    --color-white: #ffffff;
+    --color-gray-300: #d1d5db;
+    --color-gray-800: #1f2937;
+  }
+  
+  /* Contenedor principal */
+  .nav-container {
+    width: 100%;
+  }
+  
+  .navbar {
+    background-color: var(--color-primary);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 50;
+  }
+  
+  .navbar-content {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .navbar-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+  }
+  
+  /* Logo */
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-wrapper {
+    flex-shrink: 0;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(to right, var(--color-secondary), var(--color-tertiary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: all 0.3s;
+  }
+  
+  .logo-text:hover {
+    background: linear-gradient(to right, var(--color-tertiary), var(--color-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  
+  /* Menú Desktop */
+  .desktop-menu {
+    display: none;
+  }
+  
+  .menu-items {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-gray-300);
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+  
+  .menu-item.active {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .menu-item:hover:not(.active) {
+    background-color: var(--color-gray-800);
+    color: var(--color-white);
+  }
+  
+  .menu-item-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 10;
+  }
+  
+  .menu-item-background {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--color-secondary), var(--color-tertiary));
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 0;
+  }
+  
+  .menu-item:hover .menu-item-background {
+    opacity: 1;
+  }
+  
+  /* Menú Móvil */
+  .mobile-menu-button {
+    display: block;
+  }
+  
+  .toggle-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: var(--color-gray-300);
+    transition: all 0.2s;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .toggle-button:hover {
+    color: var(--color-white);
+    background-color: var(--color-gray-800);
+  }
+  
+  .mobile-menu {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .mobile-menu.open {
+    max-height: 24rem;
+    opacity: 1;
+  }
+  
+  .mobile-menu-items {
+    padding: 0.5rem;
+    border-top: 1px solid var(--color-gray-800);
+  }
+  
+  .mobile-menu-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    color: var(--color-gray-300);
+    transition: all 0.2s;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .mobile-menu-item.active {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+  }
+  
+  .mobile-menu-item:hover:not(.active) {
+    background-color: var(--color-gray-800);
+    color: var(--color-white);
+  }
+  
+  /* Iconos */
+  .menu-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  /* Espaciador para el contenido debajo del navbar fijo */
+  .nav-spacer {
+    height: 4rem;
+  }
+  
+  /* Media Queries */
+  @media (min-width: 768px) {
+    .mobile-menu-button {
+      display: none;
+    }
+    
+    .desktop-menu {
+      display: block;
+    }
+  }

@@ -1,175 +1,135 @@
-import { useState, useEffect, useCallback } from "react";
-import PropTypes from "prop-types";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import { 
-  Loader2, 
-  MapPin, 
-  Search, 
-  Layers, 
-  Info 
-} from "lucide-react";
-import L from "leaflet";
+import { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import "./MapComponent.css";
+import './MapComponent.css';  // Asegúrate de importar el archivo de estilo
 
-const MAP_CONFIG = {
-  defaultCenter: [40.4168, -3.7038],
-  defaultZoom: 13,
-  tileLayer: {
-    url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  },
-};
+const API_URL = "https://api.example.com/locations"; // Reemplaza con una API real
 
-const CustomMarker = ({ position, name, description }) => {
-  const icon = new L.Icon({
-    iconUrl: "/marker-icon.png",
-    shadowUrl: "/marker-shadow.png",
-    iconSize: [35, 55],
-    iconAnchor: [17, 55],
-    popupAnchor: [0, -55],
-    shadowSize: [55, 55],
-  });
-
-  return (
-    <Marker position={position} icon={icon}>
-      <Popup className="custom-popup">
-        <div className="popup-content">
-          <h3 className="popup-title">{name}</h3>
-          <p className="popup-description">{description}</p>
-        </div>
-      </Popup>
-    </Marker>
-  );
-};
-CustomMarker.propTypes = {
-  position: PropTypes.arrayOf(PropTypes.number).isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-};
-
-const MapControls = () => {
-  const map = useMap();
-  
-  const handleZoomIn = () => map.zoomIn();
-  const handleZoomOut = () => map.zoomOut();
-
-  return (
-    <div className="map-controls">
-      <button onClick={handleZoomIn} className="zoom-btn zoom-in">
-        <MapPin className="btn-icon" />
-      </button>
-      <button onClick={handleZoomOut} className="zoom-btn zoom-out">
-        <Layers className="btn-icon" />
-      </button>
-    </div>
-  );
-};
-
-const MapComponent = () => {
+function MapComponent() {
   const [locations, setLocations] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const fetchLocations = useCallback(async (query = "Madrid") => {
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?q=${query}&format=json&addressdetails=1&limit=5`
-      );
-      
-      if (!response.ok) {
-        throw new Error("Error en la respuesta del servidor");
-      }
-      
-      const data = await response.json();
-      const mappedLocations = data.map((location) => ({
-        id: location.place_id,
-        name: location.display_name,
-        latitude: parseFloat(location.lat),
-        longitude: parseFloat(location.lon),
-        description: `Ubicación encontrada cerca de ${location.display_name}`,
-      }));
-      
-      setLocations(mappedLocations);
-    } catch (err) {
-      console.error("Error fetching locations:", err);
-      setError("Error al cargar las ubicaciones. Por favor, inténtalo de nuevo más tarde.");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const [tasks, setTasks] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [taskText, setTaskText] = useState("");
+  const [taskType, setTaskType] = useState("normal"); // Nuevo estado para tipo de tarea
+  const [selectedTask, setSelectedTask] = useState(null); // Para redirigir el mapa a una tarea específica
 
   useEffect(() => {
-    fetchLocations();
-  }, [fetchLocations]);
+    fetch(API_URL)
+      .then((response) => response.json())
+      .then((data) => setLocations(data))
+      .catch((error) => console.error("Error fetching locations:", error));
+  }, []);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      fetchLocations(searchTerm);
+  function MapClickHandler() {
+    useMapEvents({
+      click(e) {
+        setSelectedLocation(e.latlng);
+      },
+    });
+    return null;
+  }
+
+  const addTask = () => {
+    if (selectedLocation && taskText) {
+      setTasks([...tasks, { text: taskText, location: selectedLocation, type: taskType }]);
+      setTaskText("");
+      setTaskType("normal"); // Reset the task type
     }
   };
 
-  if (loading) {
-    return (
-      <div className="map-loading">
-        <Loader2 className="map-loader animate-spin" />
-        <p>Cargando ubicaciones...</p>
-      </div>
+  const editTask = (index, newText, newType) => {
+    const updatedTasks = tasks.map((task, i) =>
+      i === index ? { ...task, text: newText, type: newType } : task
     );
-  }
+    setTasks(updatedTasks);
+  };
 
-  if (error) {
-    return (
-      <div className="map-error">
-        <Info className="error-icon" />
-        <p>{error}</p>
-      </div>
-    );
-  }
+  const deleteTask = (index) => {
+    setTasks(tasks.filter((_, i) => i !== index));
+  };
+
+  const handleTaskClick = (task) => {
+    setSelectedTask(task);
+  };
+
+  // Redirigir el mapa cuando se selecciona una tarea
+  useEffect(() => {
+    if (selectedTask) {
+      const map = document.querySelector(".leaflet-container")._leaflet_map;
+      map.setView([selectedTask.location.lat, selectedTask.location.lng], 13);
+    }
+  }, [selectedTask]);
 
   return (
-    <div className="map-component">
-      <div className="map-search-container">
-        <form onSubmit={handleSearch} className="search-form">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Buscar ubicación..."
-            className="search-input"
-          />
-          <button type="submit" className="search-btn">
-            <Search className="search-icon" />
-          </button>
-        </form>
-      </div>
-
-      <div className="map-container">
-        <MapContainer 
-          center={MAP_CONFIG.defaultCenter} 
-          zoom={MAP_CONFIG.defaultZoom} 
-          className="map"
-        >
-          <MapControls />
-          <TileLayer 
-            url={MAP_CONFIG.tileLayer.url} 
-            attribution={MAP_CONFIG.tileLayer.attribution} 
-          />
-          {locations.map((location) => (
-            <CustomMarker
-              key={location.id}
-              position={[location.latitude, location.longitude]}
-              name={location.name}
-              description={location.description}
-            />
+    <div className="map-container">
+      <MapContainer center={[43.263, -2.935]} zoom={13} style={{ height: "500px", width: "100%" }}>
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <MapClickHandler />
+        {locations.map((loc, index) => (
+          <Marker key={index} position={[loc.latitude, loc.longitude]}>
+            <Popup>{loc.name}</Popup>
+          </Marker>
+        ))}
+        {selectedLocation && (
+          <Marker position={[selectedLocation.lat, selectedLocation.lng]}>
+            <Popup>
+              Nueva tarea:
+              <input 
+                type="text" 
+                value={taskText} 
+                onChange={(e) => setTaskText(e.target.value)} 
+              />
+              <br />
+              Tipo de tarea:
+              <select value={taskType} onChange={(e) => setTaskType(e.target.value)}>
+                <option value="normal">Normal</option>
+                <option value="high">Alta prioridad</option>
+                <option value="low">Baja prioridad</option>
+              </select>
+              <br />
+              <button className="add-task-btn" onClick={addTask}>Agregar</button>
+            </Popup>
+          </Marker>
+        )}
+        {tasks.map((task, index) => (
+          <Marker key={index} position={[task.location.lat, task.location.lng]}>
+            <Popup>
+              Tarea: {task.text}
+              <br />
+              Tipo: {task.type === "high" ? "Alta prioridad" : task.type === "low" ? "Baja prioridad" : "Normal"}
+              <br />
+              Ubicación: ({task.location.lat.toFixed(4)}, {task.location.lng.toFixed(4)})
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+      <div className="task-list">
+        <h3 className="task-header">Tareas Pendientes</h3>
+        <ul>
+          {tasks.map((task, index) => (
+            <li key={index} className="task-item" onClick={() => handleTaskClick(task)}>
+              <input 
+                type="text" 
+                value={task.text} 
+                onChange={(e) => editTask(index, e.target.value, task.type)} 
+                className="task-input"
+              />
+              <span className="task-location">
+                ({task.location.lat.toFixed(4)}, {task.location.lng.toFixed(4)})
+              </span>
+              <span className="task-type">
+                ({task.type === "high" ? "Alta" : task.type === "low" ? "Baja" : "Normal"})
+              </span>
+              <button className="delete-btn" onClick={() => deleteTask(index)}>Eliminar</button>
+            </li>
           ))}
-        </MapContainer>
+        </ul>
       </div>
     </div>
   );
-};
+}
 
 export default MapComponent;

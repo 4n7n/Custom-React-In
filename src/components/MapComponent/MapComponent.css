@@ -1,0 +1,109 @@
+/* Estilo general para el fondo oscuro */
+.map-container {
+    background-color: #181818;
+    color: white;
+    font-family: 'Roboto', sans-serif; /* Usar una fuente más moderna */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Sombra suave alrededor */
+  }
+  
+  /* Estilo para el título de tareas */
+  h3.task-header {
+    color: #00ff00; /* Verde para el título */
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para la lista de tareas */
+  .task-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Estilo para cada tarea */
+  .task-item {
+    background-color: #333; /* Fondo oscuro para las tareas */
+    border: 1px solid #444;
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 12px;
+    transition: all 0.3s ease; /* Transición suave al interactuar */
+  }
+  
+  .task-item:hover {
+    background-color: #444; /* Efecto hover: cambiar a un tono más claro */
+    transform: scale(1.02); /* Aumentar ligeramente el tamaño al pasar el ratón */
+  }
+  
+  /* Estilo para los inputs de las tareas */
+  .task-item input {
+    background-color: #222; /* Fondo oscuro en los inputs */
+    border: 1px solid #555;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    width: 70%;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .task-item input:focus {
+    border-color: #00ff00; /* Verde brillante al enfocar */
+    outline: none;
+  }
+  
+  /* Estilo para la ubicación de la tarea */
+  .task-item .task-location {
+    color: #00bfff; /* Azul para la ubicación */
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+  
+  /* Estilo de los botones de agregar y eliminar */
+  .add-task-btn, .delete-btn {
+    background-color: #00ff00; /* Verde para botones */
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .add-task-btn:hover, .delete-btn:hover {
+    background-color: #009900; /* Verde más oscuro para hover */
+    transform: scale(1.05); /* Efecto de aumento al pasar el ratón */
+  }
+  
+  /* Estilo específico para el botón de eliminar */
+  .delete-btn {
+    background-color: #ff6347; /* Rojo tomate para el botón de eliminar */
+    margin-left: 10px;
+  }
+  
+  .delete-btn:hover {
+    background-color: #ff4500; /* Rojo más oscuro para hover */
+  }
+  
+  /* Estilo del formulario de entrada */
+  .task-item button {
+    margin-top: 10px;
+  }
+  
+  /* Estilo general para las transiciones de los botones */
+  button {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Estilo adicional para los márgenes de las tareas */
+  .task-item input,
+  .add-task-btn {
+    margin-right: 10px;
+  }
+  

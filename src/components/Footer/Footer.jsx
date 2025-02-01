@@ -1,63 +1,102 @@
-import { Github, Linkedin, Twitter, Globe, Code, Heart } from 'lucide-react';
+import { 
+  Brain,
+  CheckSquare,
+  Users,
+  Github,
+  Mail,
+  Book,
+  HelpCircle,
+  MessageCircle,
+  Youtube
+} from 'lucide-react';
 import './Footer.css';
 
 const Footer = () => {
-  const socialLinks = [
-    {
-      Icon: Github,
-      href: 'https://github.com/your-profile',
-      title: 'GitHub'
-    },
-    {
-      Icon: Linkedin,
-      href: 'https://linkedin.com/in/your-profile',
-      title: 'LinkedIn'
-    },
-    {
-      Icon: Twitter,
-      href: 'https://twitter.com/your-profile',
-      title: 'Twitter'
-    }
-  ];
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="footer">
       <div className="footer-container">
-        <div className="footer-branding">
-          <Globe className="footer-icon" />
-          <span className="footer-copyright">
-            © {new Date().getFullYear()} TaskMap
-          </span>
-        </div>
-       
-        <div className="footer-social">
-          <div className="social-links">
-            {socialLinks.map(({ Icon, href, title }, index) => (
-              <a
-                key={index}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link"
-                title={title}
-              >
-                <Icon className="social-icon" />
-              </a>
-            ))}
+        <div className="footer-grid">
+          {/* Sección Principal */}
+          <div className="footer-section">
+            <h3 className="company-title">TaskMaster AI</h3>
+            <p className="company-description">
+              Optimizando tu productividad con inteligencia artificial y gestión inteligente de tareas.
+            </p>
+            <div className="social-icons">
+              <Github className="social-icon" />
+              <Mail className="social-icon" />
+              <Youtube className="social-icon" />
+            </div>
           </div>
-          
-          <div className="developer-info">
-            <a 
-              href="#" 
-              className="developer-link"
-              title="About the Developer"
-            >
-              <Code className="developer-icon" />
-              <span>Desarrollado</span>
-            </a>
-            <span className="love-indicator">
-              <Heart className="heart-icon" />
-            </span>
+
+          {/* Características */}
+          <div className="footer-section">
+            <h4 className="section-title">Características</h4>
+            <ul className="features-list">
+              <li className="feature-item">
+                <Brain className="feature-icon" />
+                <span>Organización Inteligente</span>
+              </li>
+              <li className="feature-item">
+                <CheckSquare className="feature-icon" />
+                <span>Priorización Automática</span>
+              </li>
+              <li className="feature-item">
+                <Users className="feature-icon" />
+                <span>Colaboración en Equipo</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Recursos y Ayuda */}
+          <div className="footer-section">
+            <h4 className="section-title">Recursos</h4>
+            <ul className="resources-list">
+              <li className="resource-item">
+                <Book className="resource-icon" />
+                <a href="#" className="resource-link">Guía de Inicio</a>
+              </li>
+              <li className="resource-item">
+                <HelpCircle className="resource-icon" />
+                <a href="#" className="resource-link">Centro de Ayuda</a>
+              </li>
+              <li className="resource-item">
+                <MessageCircle className="resource-icon" />
+                <a href="#" className="resource-link">Blog y Tips</a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contacto y Legal */}
+          <div className="footer-section">
+            <h4 className="section-title">Contacto y Legal</h4>
+            <ul className="contact-list">
+              <li className="contact-item">
+                <a href="mailto:soporte@taskmaster.ai" className="contact-link">Soporte</a>
+              </li>
+              <li className="contact-item">
+                <a href="#" className="contact-link">Política de Privacidad</a>
+              </li>
+              <li className="contact-item">
+                <a href="#" className="contact-link">Términos de Uso</a>
+              </li>
+              <li className="contact-item">
+                <a href="#" className="contact-link">Estado del Servicio</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="footer-bottom">
+        <div className="bottom-container">
+          <div className="bottom-content">
+            <p className="copyright">
+              © {currentYear} TaskMaster AI. Todos los derechos reservados.
+            </p>
           </div>
         </div>
       </div>

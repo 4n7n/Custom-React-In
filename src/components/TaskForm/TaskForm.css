@@ -1,0 +1,400 @@
+:root {
+  /* Colores principales mejorados */
+  --color-dark: #0a0c0f;
+  --color-dark-secondary: #131619;
+  --color-dark-tertiary: #1a1d21;
+  --color-green: #00cc88;
+  --color-green-hover: #00b377;
+  --color-green-transparent: rgba(0, 204, 136, 0.1);
+  --color-blue: #3b82f6;
+  --color-blue-hover: #2563eb;
+  --color-blue-transparent: rgba(59, 130, 246, 0.1);
+  --color-white: #ffffff;
+  --color-gray: #9ca3af;
+  --color-light-gray: #1f2937;
+  --color-danger: #ef4444;
+  --color-danger-hover: #dc2626;
+  --color-warning: #f59e0b;
+  --color-success: #10b981;
+  
+  /* Nuevas variables para glassmorphism */
+  --glass-bg: rgba(19, 22, 25, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+  
+  /* Sistema de espaciado */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Bordes y sombras mejoradas */
+  --border-radius-sm: 6px;
+  --border-radius: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-full: 9999px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 15px rgba(0, 204, 136, 0.3);
+}
+
+/* Mejoras en estilos globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* Contenedor principal mejorado */
+.task-container {
+  min-height: 100vh;
+  padding: var(--spacing-xl);
+  background: 
+    radial-gradient(circle at top right, rgba(0, 204, 136, 0.1), transparent 40%),
+    radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.1), transparent 40%),
+    linear-gradient(to bottom, var(--color-dark), var(--color-dark-secondary));
+}
+
+/* Mejoras en tarjeta principal con glassmorphism */
+.task-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--glass-shadow);
+  margin-bottom: var(--spacing-xl);
+  transition: var(--transition);
+  overflow: hidden;
+  position: relative;
+}
+
+.task-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-green),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.task-card:hover::before {
+  opacity: 1;
+}
+
+.task-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 
+    0 20px 25px rgba(0, 0, 0, 0.2),
+    0 0 0 1px var(--glass-border);
+}
+
+/* Mejoras en el encabezado */
+.card-header {
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-bottom: 1px solid var(--glass-border);
+  background: linear-gradient(
+    to right,
+    var(--color-dark-tertiary),
+    rgba(26, 29, 33, 0.8)
+  );
+  position: relative;
+}
+
+.card-title {
+  color: var(--color-green);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  position: relative;
+  display: inline-block;
+}
+
+.card-title::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, var(--color-green), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.task-card:hover .card-title::after {
+  transform: scaleX(1);
+}
+
+/* Mejoras en los inputs */
+.form-input,
+.form-select {
+  background: rgba(26, 29, 33, 0.8);
+  border: 2px solid var(--glass-border);
+  color: var(--color-white);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.form-input:hover,
+.form-select:hover {
+  border-color: var(--color-gray);
+  background: rgba(26, 29, 33, 0.9);
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-green);
+  box-shadow: 0 0 0 4px var(--color-green-transparent);
+  background: rgba(26, 29, 33, 1);
+}
+
+/* Nuevos estados de carga */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.loading {
+  background: linear-gradient(
+    to right,
+    var(--color-dark-secondary) 8%,
+    var(--color-dark-tertiary) 18%,
+    var(--color-dark-secondary) 33%
+  );
+  background-size: 800px 104px;
+  animation: shimmer 1.5s linear infinite;
+}
+
+/* Mejoras en los botones */
+.submit-button {
+  background: linear-gradient(135deg, var(--color-green), var(--color-green-hover));
+  color: var(--color-white);
+  border: none;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.submit-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.submit-button:hover::before {
+  left: 100%;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 12px rgba(0, 204, 136, 0.3),
+    0 0 0 2px var(--color-green-transparent);
+}
+
+/* Nuevos estados de prioridad */
+.priority-high {
+  border-left: 4px solid var(--color-danger);
+}
+
+.priority-medium {
+  border-left: 4px solid var(--color-warning);
+}
+
+.priority-low {
+  border-left: 4px solid var(--color-success);
+}
+
+/* Mejoras en las tags */
+.tag-container {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.type-tag,
+.priority-tag {
+  padding: 0.4rem 1rem;
+  border-radius: var(--border-radius-full);
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.type-tag::before,
+.priority-tag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.type-tag:hover::before,
+.priority-tag:hover::before {
+  left: 100%;
+}
+
+/* Nuevas animaciones de transición */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.task-list > * {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+/* Mejoras en la accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Mejoras en el scroll */
+@media (hover: hover) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-dark-tertiary);
+    border-radius: var(--border-radius-full);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      var(--color-light-gray),
+      var(--color-dark-tertiary)
+    );
+    border-radius: var(--border-radius-full);
+    border: 2px solid var(--color-dark-tertiary);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gray);
+  }
+}
+
+/* Nuevos breakpoints responsivos */
+@media (max-width: 1024px) {
+  .task-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .task-container {
+    padding: var(--spacing-md);
+  }
+
+  .input-row {
+    grid-template-columns: 1fr;
+  }
+
+  .task-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-header {
+    padding: var(--spacing-md);
+  }
+
+  .card-content {
+    padding: var(--spacing-md);
+  }
+
+  .form-input,
+  .form-select {
+    font-size: 16px; /* Previene zoom en iOS */
+  }
+}
